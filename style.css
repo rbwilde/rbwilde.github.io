@@ -1,0 +1,12 @@
+#dealer img{
+	height: 200px;
+	max-width: 400px;
+}
+#player img{
+	height: 200px;
+	max-width: 400px;
+}
+#middle{
+	height: 100px;
+	width: 100px;
+}
