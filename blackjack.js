@@ -7,9 +7,12 @@ var theDeck = [];
 var newGame = $("#deal")
 
 newGame.on("click",function(){
-	game.render();
-	
+	$("#dealerCard1").remove();
+	$("#dealerCard2").remove();
+	// game.render();
 })
+
+
 
 var Deck= function Deck(names, values, imgs){
 	this.cardNames = names;
@@ -161,6 +164,8 @@ var Blackjack = function Blackjack(deck){
 				var dealerHit = setInterval(function(){
 					var $dealerHandValue = $(".totalD").html();
 					var $playerHandValue = $(".totalP").html();
+					var $money = $("#bank").val();
+					var $wi
 
 					if($dealerHandValue>21){
 				$(dealerHand).each(function (i){
@@ -184,6 +189,7 @@ var Blackjack = function Blackjack(deck){
 					if($dealerHandValue>21){
 						$(".message").text("DEALER BUST! YOU WIN!")
 						clearInterval(dealerHit);
+						debugger //switch val to text get rib of dollar signs
 						$("#bank").text((parseInt($("#bank").val())*2) + parseInt($(".pot").val()));
 						console.log($(".pot").html());
 						$(".pot").html("$"+"0");
