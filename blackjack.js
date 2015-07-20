@@ -1,14 +1,17 @@
-
-
-
 console.log("linked");
 
 var cardNames = ["ace","king","queen","jack","10","9","8","7","6","5","4","3","2","ace","king","queen","jack","10","9","8","7","6","5","4","3","2","ace","king","queen","jack","10","9","8","7","6","5","4","3","2","ace","king","queen","jack","10","9","8","7","6","5","4","3","2"];
 var cardValues = [11,10,10,10,10,9,8,7,6,5,4,3,2,11,10,10,10,10,9,8,7,6,5,4,3,2,11,10,10,10,10,9,8,7,6,5,4,3,2,11,10,10,10,10,9,8,7,6,5,4,3,2];
-var cardImages = ["cards/ace_of_spades.png","cards/king_of_spades.png","cards/queen_of_spades.png","cards/jack_of_spades.png","cards/10_of_spades.png","cards/9_of_spades.png","cards/8_of_spades.png","cards/7_of_spades.png","cards/6_of_spades.png","cards/5_of_spades.png","cards/4_of_spades.png","cards/3_of_spades.png","cards/2_of_spades.png","cards/ace_of_diamonds.png","cards/king_of_diamonds.png","cards/queen_of_diamonds.png","cards/jack_of_diamonds.png","cards/10_of_diamonds.png","cards/9_of_diamonds.png","cards/8_of_diamonds.png","cards/7_of_diamonds.png","cards/6_of_diamonds.png","cards/5_of_diamonds.png","cards/4_of_diamonds.png","cards/3_of_diamonds.png","cards/2_of_diamonds.png","cards/ace_of_clubs.png","cards/king_of_clubs.png","cards/queen_of_clubs.png","cards/jack_of_clubs.png","cards/10_of_clubs.png","cards/9_of_clubs.png","cards/8_of_clubs.png","cards/7_of_clubs.png","cards/6_of_clubs.png","cards/5_of_clubs.png","cards/4_of_clubs.png","cards/3_of_clubs.png","cards/2_of_clubs.png","cards/ace_of_hearts.png","cards/king_of_hearts.png","cards/queen_of_hearts.png","cards/jack_of_hearts.png","cards/10_of_hearts.png","cards/9_of_hearts.png","cards/8_of_hearts.png","cards/7_of_hearts.png","cards/6_of_hearts.png","cards/5_of_hearts.png","cards/4_of_hearts.png","cards/3_of_hearts.png","cards/2_of_hearts.png"];
+var cardImages = ["cards/card-aceofspades.png","cards/card-kingofspades.png","cards/card-queenofspades.png","cards/card-jackofspades.png","cards/card-10ofspades.png","cards/card-9ofspades.png","cards/card-8ofspades.png","cards/card-7ofspades.png","cards/card-6ofspades.png","cards/card-5ofspades.png","cards/card-4ofspades.png","cards/card-3ofspades.png","cards/card-2ofspades.png","cards/card-aceofdiamonds.png","cards/card-kingofdiamonds.png","cards/card-queenofdiamonds.png","cards/card-jackofdiamonds.png","cards/card-10ofdiamonds.png","cards/card-9ofdiamonds.png","cards/card-8ofdiamonds.png","cards/card-7ofdiamonds.png","cards/card-6ofdiamonds.png","cards/card-5ofdiamonds.png","cards/card-4ofdiamonds.png","cards/card-3ofdiamonds.png","cards/card-2ofdiamonds.png","cards/card-aceofclubs.png","cards/card-kingofclubs.png","cards/card-queenofclubs.png","cards/card-jackofclubs.png","cards/card-10ofclubs.png","cards/card-9ofclubs.png","cards/card-8ofclubs.png","cards/card-7ofclubs.png","cards/card-6ofclubs.png","cards/card-5ofclubs.png","cards/card-4ofclubs.png","cards/card-3ofclubs.png","cards/card-2ofclubs.png","cards/card-aceofhearts.png","cards/card-kingofhearts.png","cards/card-queenofhearts.png","cards/card-jackofhearts.png","cards/card-10ofhearts.png","cards/card-9ofhearts.png","cards/card-8ofhearts.png","cards/card-7ofhearts.png","cards/card-6ofhearts.png","cards/card-5ofhearts.png","cards/card-4ofhearts.png","cards/card-3ofhearts.png","cards/card-2ofhearts.png"];
 var theDeck = [];
+var newGame = $("#deal")
 
+newGame.on("click",function(){
+	theDeck=[];
 
+	game.render();
+	Blackjack();
+})
 
 var Deck= function Deck(names, values, imgs){
 	this.cardNames = names;
@@ -19,25 +22,43 @@ var Deck= function Deck(names, values, imgs){
 var Blackjack = function Blackjack(deck){
 	this.deck=deck;
 	this.bet = function bet(){
-		var $betAmount = $("<input>").attr("placeholder","How much?");
-		var $placeBet = $("<button>").text("Place your bet");
-		var $betDiv = $("<div>").attr("class","bet");
+		var $redChip = $(".red");
+		var $blueChip = $(".blue");
+		var $greenChip = $(".green");
 		var $potDiv = $("<div>").attr("class","pot")
-		// var $bankDiv = $("<div>").attr("id","bank")
-		var $bank = 1000;
+		var $bankDiv = $("<div>").attr("id","bank")
+		var $bank = 5000;
 		var $thePot = 0;
-		$placeBet.on("click",function (e){
-			$thePot = $($betAmount).val();
-			// $($bank).val() - $($betAmount).val() === $(".bank").val();
-				$potDiv.append($thePot);
-				$("#middle").append($potDiv);
-				$(".bank").append($bank);
-				console.log($($bank).val());
-		});
-
-		$betDiv.append($betAmount,$placeBet);
-		$("#middle").append($betDiv);
-		$("#bank").append($bank);
+		
+		$redChip.on("click",function (e){
+			$thePot = parseInt($thePot) + parseInt($(this).val());
+			$bank = parseInt($bank) - parseInt($(this).val());
+			$(".pot").text("$"+ $thePot);
+			$("#bank").text("$" +$bank);	
+				});
+		$(".pot").text("$"+ $thePot);
+		$("#bank").text("$" +$bank);
+		
+		$blueChip.on("click",function (e){
+			$thePot = parseInt($thePot) + parseInt($(this).val());
+			$bank = parseInt($bank) - parseInt($(this).val());
+			$(".pot").text("$"+ $thePot);
+			$("#bank").text("$" +$bank);	
+				});
+		$(".pot").text("$"+ $thePot);
+		$("#bank").text("$" +$bank);
+		
+		$greenChip.on("click",function (e){
+			$thePot = parseInt($thePot) + parseInt($(this).val());
+			$bank = parseInt($bank) - parseInt($(this).val());
+			$(".pot").text("$" + $thePot);	
+			$("#bank").text("$" +$bank);
+				});
+		$(".pot").text("$" + $thePot);
+		$("#bank").text("$" +$bank);
+		
+		$potDiv.append($thePot);
+		
 		//if game is won pot + 0.5 goes to bank
 		//if lost pot disappears or moves to money lost
 	},
@@ -69,31 +90,149 @@ var Blackjack = function Blackjack(deck){
   			playerHand.push(theDeck[2]);
   			dealerHand.push(theDeck[3]);
 
-		var $playerSeat = $("#player");
-		var $dealerSeat = $("#dealer");
+		var $playerSeatLeft = $("#playerCard1");
+		var $dealerSeatLeft = $("#dealerCard1");
+		var $playerSeatRight = $("#playerCard2");
+		var $dealerSeatRight = $("#dealerCard2");
+
 		var $playerCard1 = $("<img>").attr("src",playerHand[0].cardImages);
 		var $dealerCard1 = $("<img>").attr("src",dealerHand[0].cardImages);
 		var $playerCard2 = $("<img>").attr("src",playerHand[1].cardImages);
 		var $dealerCard2 = $("<img>").attr("src",dealerHand[1].cardImages);
-  		
 
-  		$playerSeat.append($playerCard1, $playerCard2);
-  		$dealerSeat.append($dealerCard1, $dealerCard2);
+  		var $playerHandValue = parseInt(playerHand[0].cardValues)+parseInt(playerHand[1].cardValues);
+  		var $dealerHandValue = parseInt(dealerHand[0].cardValues)+parseInt(dealerHand[1].cardValues);
+
+  		$playerSeatLeft.append($playerCard1);
+  		$playerSeatRight.append($playerCard2);
+  		$dealerSeatLeft.append($dealerCard1);
+  		$dealerSeatRight.append($dealerCard2);
+		$(".totalP").text($playerHandValue);
+		$(".totalD").text($dealerHandValue);
+
+			if($playerHandValue===21){
+				$(playerHand).each(function (i){
+					if($(this).cardValues===11 && $(this).cardValues===10){
+						console.log("Blackjack!");
+						winnerBlackjack();
+					}				
+				})
+			};
+		
+		var $hit = $("#hit").text("Hit");
+		var $stay = $("#stay").text("Stay");
+		
+		$("#hitstay").append($hit, $stay);
+		
+		$hit.on("click",function(){
+			var $hitCard = theDeck[Math.floor(Math.random() * theDeck.length)];
+			playerHand.push($hitCard);
+			var $lastCard = playerHand[playerHand.length-1]
+			var $playerCardHit = $("<img>").attr("src",$lastCard.cardImages);
+			$playerHandValue = parseInt($playerHandValue) + parseInt($lastCard.cardValues);
+			$playerSeatLeft.append($playerCardHit);
+			$(".totalP").text($playerHandValue);
+			
+			if($playerHandValue>21){
+				$(playerHand).each(function (i){
+					if($(this).attr("cardValues")===11 && $playerHandValue>21){
+						$playerHandValue = parseInt($playerHandValue) - 10;
+						$(this).attr("cardValues",1);
+						$(".totalP").text($playerHandValue);
+					}
+				})
+			};
+
+			if($playerHandValue>21){
+				$(".pot").empty();
+				$(".message").text("BUST! YOU LOSE!")
+					//insert bust modal?
+				// $("#restart").empty();
+
+			}
+		});//hit button end	
 	
+			$stay.on("click",function(){
+				//make dealer card visible
+				var dealerHit = setInterval(function(){
+					var $dealerHandValue = $(".totalD").html();
+					var $playerHandValue = $(".totalP").html();
 
-	},
+					if($dealerHandValue>21){
+				$(dealerHand).each(function (i){
+					if($(this).attr("cardValues")===11 && $dealerHandValue>21){
+						$dealerHandValue = parseInt($dealerHandValue) - 10;
+						$(this).attr("cardValues",1);
+						$(".totalD").text($dealerHandValue);
+					}
+				})
+			};
+					if($dealerHandValue<17){
+						var $hitCard = theDeck[Math.floor(Math.random() * theDeck.length)];
+						dealerHand.push($hitCard);
+						var $lastCard = dealerHand[dealerHand.length-1]
+						var $dealerCardHit = $("<img>").attr("src",$lastCard.cardImages);
+						$dealerHandValue = parseInt($dealerHandValue) + parseInt($lastCard.cardValues);
+						$dealerSeatRight.append($dealerCardHit);
+						$(".totalD").text($dealerHandValue);
+			
+					};
+					if($dealerHandValue>21){
+						$(".message").text("DEALER BUST! YOU WIN!")
+						var $newGame = $("<button>").attr("id","deal");
+						$("#hitstay").html($newGame);
+						clearInterval(dealerHit);
+						var bet = $(".pot").html();
+						// var myBank = $("#bank").html();
+						var benjamins = 2*bet;
+						$(".pot").html("0");
+						$("#bank").html(parseInt(benjamins) + parseInt($bank));
+						//insert bust animation
+						// $("#restart").empty();
+					};
 
+					if($dealerHandValue>=17){
+						if($playerHandValue>$dealerHandValue){
+						$(".message").text("YOU WIN!");
+						var bet = $(".pot").html();
+						// var myBank = $("#bank").html();
+						var benjamins = 2*bet;
+						$(".pot").html("0");
+						$("#bank").html(parseInt(benjamins) + parseInt($bank));
+						// $(".totalD").text($dealerHandValue);
+						// $("#restart").empty();
+						} else if($playerHandValue<$dealerHandValue){
+						$(".message").text("YOU LOSE!");
+						$(".pot").empty();
+						console.log(myBank);
+						}
+					};
+
+					if($playerHandValue===$dealerHandValue){
+						$(".message").text("Push!");
+						var bet = $(".pot").html();
+						// var myBank = $("#bank").html();
+						$(".pot").html("0");
+						$("#bank").html(parseInt(bet) + parseInt($bank));
+						
+					};
+
+
+		}, 1000);//end of interval
+
+				})
+			},
 
 	this.render = function render(){
 		$(".container").empty();
+		
 		this.bet();
 		this.dealCards();
+
 	}
 
 
-
-}
-
+};//blackjack end
 for(var i=0;i<cardImages.length;i++){
 	var names = cardNames[i];
 	var values = cardValues[i];
@@ -102,9 +241,13 @@ for(var i=0;i<cardImages.length;i++){
 	var createDeck = new Deck(names,values,imgs);	
 
 	theDeck.push(createDeck);
-}
-// console.log(theDeck);
+};// console.log(theDeck);
 
 var game = new Blackjack(theDeck);
 
 game.render();
+
+
+
+
+
