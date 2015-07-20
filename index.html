@@ -9,43 +9,46 @@
   <title>Blackjack</title>
 </head>
 <body>
-	<div id="dealerSeatLeft">
-			<h1 class="totalD"></h1>
-		<div id="dealerCard1"></div>
-	</div> <!--Dealer Left-->	
-	<div id="dealerSeatRight">
-		<div id="dealerCard2"></div>	
-	</div>	<!--dealer right-->	
-		<div id="middle">
-			<div class="pot"></div>
-			<div class="message"></div>
-		</div>	<!--middle-->
-	<div id="playerSeatLeft">	
-			<h1 class="totalP"></h1>
-		<div id="playerCard1"></div>
-	</div> <!--player left-->	
-	<div id="playerSeatRight">
-		<div id="playerCard2"></div>
-	</div> <!--player Right-->	
-		<div id="controls">	
-			<div id="hitstay">
-				<a class="button button-primary" id="hit" href="#">Hit</a>
-				<a class="button button-primary" id="stay" href="#">Stay</a>
-			</div> <!--hitstay-->
-			<div id="bank"></div>
-			<a class="button button-primary" id="deal" href="#">Deal</a>
-		</div> <!--controls-->
-		<div id="coins">			
-				<div id="copper">
-					<input type="button" src="25.png" value="25" class="red"></input>
-				</div>
-				<div id="silver">
-					<input type="button" src="50.png" value="50" class="blue"></input>
-				</div>
-				<div id="gold">
-					<input type="button" src="100.png" value="100" class="green"></input>
-				</div>
-		</div> <!--coins-->			
+	<!-- <div class="container">	 -->
+		<div id="dealerSeatLeft" class="row">
+				<h1 class="totalD"></h1>
+			<div id="dealerCard1"></div>
+		</div> <!--Dealer Left-->	
+		<div id="dealerSeatRight">
+			<div id="dealerCard2"></div>	
+		</div>	<!--dealer right-->	
+			<div id="middle">
+				<div class="pot"></div>
+					<img id="potImage" src="coins.png"><img>
+				<div class="message"></div>
+			</div>	<!--middle-->
+		<div id="playerSeatLeft">	
+				<h1 class="totalP"></h1>
+			<div id="playerCard1"></div>
+		</div> <!--player left-->	
+		<div id="playerSeatRight">
+			<div id="playerCard2"></div>
+		</div> <!--player Right-->	
+			<div id="controls">	
+				<div id="hitstay">
+					<a class="button button-primary" id="hit" href="#">Hit</a>
+					<a class="button button-primary" id="stay" href="#">Stay</a>
+				</div> <!--hitstay-->
+				<div id="bank"></div>
+				<a class="button button-primary" id="deal" href="#">Deal</a>
+			</div> <!--controls-->
+			<div id="coins">			
+					<div id="copper">
+						<input type="button" src="25.png" value="25" class="red"></input>
+					</div>
+					<div id="silver">
+						<input type="button" src="50.png" value="50" class="blue"></input>
+					</div>
+					<div id="gold">
+						<input type="button" src="100.png" value="100" class="	green"></input>
+					</div>
+			</div> <!--coins-->			
+		<!-- </div>container	 -->
 </body>
   <script src="./blackjack.js"></script>
 </html>

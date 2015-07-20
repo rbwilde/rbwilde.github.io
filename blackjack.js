@@ -7,10 +7,8 @@ var theDeck = [];
 var newGame = $("#deal")
 
 newGame.on("click",function(){
-	theDeck=[];
-
 	game.render();
-	Blackjack();
+	
 })
 
 var Deck= function Deck(names, values, imgs){
@@ -27,36 +25,41 @@ var Blackjack = function Blackjack(deck){
 		var $greenChip = $(".green");
 		var $potDiv = $("<div>").attr("class","pot")
 		var $bankDiv = $("<div>").attr("id","bank")
-		var $bank = 5000;
-		var $thePot = 0;
+		$bank = 5000;
+		$thePot = 0;
+		var $potImage = $("#potImage").hide();
 		
 		$redChip.on("click",function (e){
+			$potImage.show();	
 			$thePot = parseInt($thePot) + parseInt($(this).val());
 			$bank = parseInt($bank) - parseInt($(this).val());
 			$(".pot").text("$"+ $thePot);
-			$("#bank").text("$" +$bank);	
+			$("#bank").text("$" +$bank);
 				});
 		$(".pot").text("$"+ $thePot);
-		$("#bank").text("$" +$bank);
+		$("#bank").text($bank);
 		
 		$blueChip.on("click",function (e){
+			$potImage.show();	
 			$thePot = parseInt($thePot) + parseInt($(this).val());
 			$bank = parseInt($bank) - parseInt($(this).val());
 			$(".pot").text("$"+ $thePot);
-			$("#bank").text("$" +$bank);	
+			$("#bank").text("$" +$bank);
 				});
 		$(".pot").text("$"+ $thePot);
-		$("#bank").text("$" +$bank);
+		$("#bank").text($bank);
 		
 		$greenChip.on("click",function (e){
+			$potImage.show();
 			$thePot = parseInt($thePot) + parseInt($(this).val());
 			$bank = parseInt($bank) - parseInt($(this).val());
 			$(".pot").text("$" + $thePot);	
-			$("#bank").text("$" +$bank);
+			$("#bank").text($bank);
 				});
 		$(".pot").text("$" + $thePot);
 		$("#bank").text("$" +$bank);
-		
+	
+		$bankDiv.append($bank);
 		$potDiv.append($thePot);
 		
 		//if game is won pot + 0.5 goes to bank
@@ -129,6 +132,7 @@ var Blackjack = function Blackjack(deck){
 			playerHand.push($hitCard);
 			var $lastCard = playerHand[playerHand.length-1]
 			var $playerCardHit = $("<img>").attr("src",$lastCard.cardImages);
+			$playerCardHit.attr("class","newCard");
 			$playerHandValue = parseInt($playerHandValue) + parseInt($lastCard.cardValues);
 			$playerSeatLeft.append($playerCardHit);
 			$(".totalP").text($playerHandValue);
@@ -172,49 +176,37 @@ var Blackjack = function Blackjack(deck){
 						dealerHand.push($hitCard);
 						var $lastCard = dealerHand[dealerHand.length-1]
 						var $dealerCardHit = $("<img>").attr("src",$lastCard.cardImages);
+						$dealerCardHit.attr("class","newCard");
 						$dealerHandValue = parseInt($dealerHandValue) + parseInt($lastCard.cardValues);
 						$dealerSeatRight.append($dealerCardHit);
 						$(".totalD").text($dealerHandValue);
-			
 					};
 					if($dealerHandValue>21){
 						$(".message").text("DEALER BUST! YOU WIN!")
-						var $newGame = $("<button>").attr("id","deal");
-						$("#hitstay").html($newGame);
 						clearInterval(dealerHit);
-						var bet = $(".pot").html();
-						// var myBank = $("#bank").html();
-						var benjamins = 2*bet;
-						$(".pot").html("0");
-						$("#bank").html(parseInt(benjamins) + parseInt($bank));
-						//insert bust animation
-						// $("#restart").empty();
+						$("#bank").text((parseInt($("#bank").val())*2) + parseInt($(".pot").val()));
+						console.log($(".pot").html());
+						$(".pot").html("$"+"0");
+						console.log($("#bank").val());
 					};
 
 					if($dealerHandValue>=17){
 						if($playerHandValue>$dealerHandValue){
 						$(".message").text("YOU WIN!");
-						var bet = $(".pot").html();
-						// var myBank = $("#bank").html();
-						var benjamins = 2*bet;
-						$(".pot").html("0");
-						$("#bank").html(parseInt(benjamins) + parseInt($bank));
-						// $(".totalD").text($dealerHandValue);
-						// $("#restart").empty();
+						$("#bank").html((parseInt($(".pot").html()) * 2) + parseInt($("#bank").html()));
+						$(".pot").html("$"+"0");
 						} else if($playerHandValue<$dealerHandValue){
 						$(".message").text("YOU LOSE!");
 						$(".pot").empty();
-						console.log(myBank);
+
 						}
 					};
 
 					if($playerHandValue===$dealerHandValue){
 						$(".message").text("Push!");
-						var bet = $(".pot").html();
-						// var myBank = $("#bank").html();
-						$(".pot").html("0");
-						$("#bank").html(parseInt(bet) + parseInt($bank));
-						
+						$("#bank").html(parseInt($(".pot").html()) + parseInt($("#bank").html()));
+						$(".pot").html("$"+"0");
+
 					};
 
 
@@ -224,8 +216,8 @@ var Blackjack = function Blackjack(deck){
 			},
 
 	this.render = function render(){
-		$(".container").empty();
-		
+		playerHand = [];
+		dealerHand = [];
 		this.bet();
 		this.dealCards();
 
@@ -243,7 +235,7 @@ for(var i=0;i<cardImages.length;i++){
 	theDeck.push(createDeck);
 };// console.log(theDeck);
 
-var game = new Blackjack(theDeck);
+var game = new Blackjack();
 
 game.render();
 
