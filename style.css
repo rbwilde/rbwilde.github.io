@@ -1,6 +1,6 @@
-body {
+/*body {
     overflow:hidden;
-}
+}*/
 html { 
   background: url(table.jpg) no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -106,15 +106,14 @@ h1{
 #middle{
 	height: 150px;
 }
-/*.message{
-	color: brown;
+.message{
+	color: WhiteSmoke;
 	font-size: 50px;
-	font-family: PetitScript;
 	position: relative;
-	left: 500px;
-	bottom: 30px;
+	left: 800px;
+	bottom: 400px;
 
-}*/
+}
 #copper{
 	height: 75px;
 	width: 75px;
