@@ -5,6 +5,7 @@
  */
 
 var gulp = require('gulp'),
+    ghPages = require('gulp-gh-pages');
     sass = require('gulp-sass'),
     watch = require('gulp-watch'),
     minify = require('gulp-minify'),
@@ -68,3 +69,11 @@ gulp.task('default',[
   'css',
   'watch'
 ]);
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+//github 
+gulp.task('deploy', function() {
+  return gulp.src('./dist/**/*')
+    .pipe(ghPages());
+});
